@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Ultimate Image to PDF</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="assest/css/style.css">
+</head>
+<body>
+
+<h2>Ultimate Image → PDF Tool</h2>
+
+<input type="file" id="imageInput" multiple accept="image/*"><br>
+<input type="text" id="fileName" placeholder="Nama file PDF"><br>
+
+<select id="paperSize">
+<option value="a4">A4</option>
+<option value="letter">Letter</option>
+</select>
+
+<select id="quality">
+<option value="0.4">High Compression (Very Small)</option>
+<option value="0.6">Medium Compression</option>
+<option value="0.8">Low Compression</option>
+<option value="1">No Compression (Best Quality)</option>
+</select>
+
+<select id="maxWidth">
+<option value="800">Max Width 800px (Small)</option>
+<option value="1200">Max Width 1200px</option>
+<option value="1600">Max Width 1600px</option>
+<option value="9999">Original Size</option>
+</select>
+
+<br>
+<button onclick="generatePDF()">Download PDF</button>
+
+<div class="preview" id="preview">
+  
+</div>
+<script src="assest/js/index.js"></script>
+
+</body>
+</html>
