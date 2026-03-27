@@ -1,118 +1,142 @@
-body{
+body {
   font-family: 'Segoe UI', Tahoma, sans-serif;
   background: linear-gradient(135deg, #eef2ff, #e0f2fe);
-  padding:16px;
-  margin:0;
-  text-align:center;
+  padding: 16px;
+  margin: 0;
+  text-align: center;
 }
 
-/* Container utama */
-.container{
-  max-width:420px;
-  margin:auto;
-  background:white;
-  padding:16px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+.container {
+  max-width: 420px;
+  margin: auto;
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* Preview list */
-.preview{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin-top:10px;
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
 }
 
-/* Item preview */
-.preview-item{
-  cursor:grab;
-  transition:0.2s;
+.preview-item {
+  position: relative;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.preview-item:active{
-  cursor:grabbing;
-  transform:scale(0.98);
+.preview-item:active {
+  transform: scale(0.98);
 }
 
-/* Gambar */
-.preview img{
-  width:80%;
-  border-radius:12px;
-  box-shadow:0 6px 14px rgba(0,0,0,0.15);
+/* Highlight saat dipilih untuk swap */
+.preview-item.selected img {
+  outline: 3px solid #6366f1;
+  outline-offset: 3px;
+  border-radius: 12px;
 }
 
-/* Input & Select */
-input, select{
-  width:100%;
-  margin:6px 0;
-  padding:10px;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-  font-size:14px;
-  outline:none;
-  transition:0.2s;
+.preview-item.selected::after {
+  content: "dipilih";
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6366f1;
+  color: white;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  pointer-events: none;
 }
 
-input:focus, select:focus{
-  border-color:#6366f1;
-  box-shadow:0 0 0 3px rgba(99,102,241,0.2);
+.preview img {
+  width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  display: block;
 }
 
-/* Button modern */
-button{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
+input, select {
+  width: 50%;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 28px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+}
+
+button {
+  width: 50%;
+  padding: 12px;
+  margin-top: 10px;
   background: linear-gradient(135deg, #6366f1, #3b82f6);
-  color:white;
-  border:none;
-  border-radius:12px;
-  font-size:15px;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.2s;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-button:hover{
-  transform:translateY(-1px);
-  box-shadow:0 6px 14px rgba(59,130,246,0.4);
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(59,130,246,0.4);
 }
 
-button:active{
-  transform:scale(0.97);
+button:active {
+  transform: scale(0.97);
 }
 
-/* Judul */
-h1, h2{
-  margin:8px 0;
-  color:#1f2937;
+h1, h2 {
+  margin: 8px 0;
+  color: #1f2937;
 }
 
-.preview-item.dragging{
-  opacity:0.5;
-}
-
-.delete-btn{
-  background:#ef4444;
-  color:white;
-  border:none;
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
   width: 80%;
-  font-size:14px;
-  cursor:pointer;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 6px;
+  border-radius: 8px;
+  padding: 4px 0;
 }
 
-.preview-item{
-  position:relative;
-}
-
-/* Responsive tambahan */
-@media (min-width:768px){
-  body{
-    padding:30px;
+@media (max-width: 500px) {
+  .preview {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .container{
-    padding:24px;
+  input, select {
+    width: 90%;
+  }
+
+  button {
+    width: 90%;
+  }
+
+  .preview img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .container {
+    padding: 24px;
   }
 }
