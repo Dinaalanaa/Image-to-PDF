@@ -123,6 +123,9 @@ async function generatePDF() {
   const maxWidth = parseInt(document.getElementById("maxWidth").value);
 
   let widthMM = paper === "a4" ? 210 : 216;
+
+  const spacing = 5; 
+
   let totalHeight = 0;
   let compressedImages = [];
 
@@ -133,25 +136,36 @@ async function generatePDF() {
     let ratio = widthMM / img.width;
     let heightMM = img.height * ratio;
 
-    totalHeight += heightMM;
+    totalHeight += heightMM + spacing;
 
-    compressedImages.push({ data: compressed, heightMM });
+    compressedImages.push({
+      data: compressed,
+      heightMM
+    });
   }
+
+  totalHeight -= spacing;
 
   const pdf = new jsPDF("p", "mm", [widthMM, totalHeight]);
+
+  pdf.setFillColor(0, 0, 0);
+  pdf.rect(0, 0, widthMM, totalHeight, "F");
+
   let y = 0;
 
-  for (let img of compressedImages) {
+  compressedImages.forEach((img, index) => {
     pdf.addImage(img.data, "JPEG", 0, y, widthMM, img.heightMM);
-    y += img.heightMM;
-  }
+
+    if (index < compressedImages.length - 1) {
+      y += img.heightMM + spacing;
+    }
+  });
 
   let name = document.getElementById("fileName").value.trim();
   if (name === "") name = "compressed-file";
 
   pdf.save(name + ".pdf");
 }
-
 function loadImage(src) {
   return new Promise(resolve => {
     const img = new Image();
